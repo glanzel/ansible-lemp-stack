@@ -1,7 +1,0 @@
----
-mysql_root_password: "2neeguas2"
-http_host: "fitis.trakkr.de"
-http_conf: "fitis.conf"
-http_port: "80"
-https_port: "443"
-ssh_port: "22"
