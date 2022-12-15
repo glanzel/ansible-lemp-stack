@@ -1,5 +1,5 @@
 ##################################################
-# DO Community Playbooks: LEMP on Ubuntu 18.04
+# Playbooks: LEMP on Ubuntu inspired by DO Community
 ##################################################
 ---
 - hosts: all
@@ -12,9 +12,9 @@
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
       loop: [ 'aptitude' ]
 
-    - name: Install LEMP Packages
+    - name: Install LEMP+ Packages
       apt: name={{ item }} update_cache=yes state=latest
-      loop: [ 'nginx', 'mysql-server', 'python3-pymysql', 'php-fpm', 'php-mysql' ]
+      loop: [ 'nginx', 'mariadb-server', 'python3-pymysql', 'php-fpm', 'php-mysql', 'git', 'ne' ]
     
 # Nginx Configuration
     - name: Sets Nginx conf file
@@ -93,3 +93,16 @@
       service:
         name: nginx
         state: restarted
+        
+# Sets up Ngnix-ui   
+    - name: load ngnix ui install script
+      get_url: 
+        url: https://raw.githubusercontent.com/0xJacky/nginx-ui/master/install.sh 
+        dest: /tmp/ 
+        mode: 0755
+      
+    - name: excecute ngnix ui install script
+      shell: /tmp/install.sh 
+      args:
+        creates: /usr/local/bin/nginx-ui
+
